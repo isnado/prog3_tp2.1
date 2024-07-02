@@ -2,7 +2,7 @@ class Card {
     constructor(name, img) {
         this.name = name;
         this.img = img;
-        this.isFlipped = false;
+        this.isFlipped = false;// Inicialmente la carta no está volteada
         this.element = this.#createCardElement();
     }
 
@@ -19,23 +19,26 @@ class Card {
               </div>
           </div>
       `;
+      cardElement.addEventListener("click", () => this.toggleFlip()); // Agregar listener para voltear la carta al hacer clic
         return cardElement;
     }
 
     #flip() {
         const cardElement = this.element.querySelector(".card");
         cardElement.classList.add("flipped");
+        this.isFlipped = true; // Actualiza el estado de la carta al voltearla
     }
 
     #unflip() {
         const cardElement = this.element.querySelector(".card");
         cardElement.classList.remove("flipped");
+        this.isFlipped = false; // Actualiza el estado de la carta al no voltearla
     }
     toggleFlip() {
         if (this.isFlipped) {
-            this.#unflip();
-        } 
-            else {
+            this.#unflip();         
+        }
+        else {
             this.#flip();
         }
     }
